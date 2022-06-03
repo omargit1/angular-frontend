@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="card">
+        <h3 class="text-center"> Users List </h3>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users; let ind= index">
+                        <td routerLink="/detail/{{user.id}}"> {{ user.id }} - {{ ind }}</td>
+                        <td> {{ user.firstName }}</td>
+                        <td> {{ user.lastName }}</td>
+                        <td> {{ user.email }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <button [ngStyle]="{'font-size':20 , 'font-style':'italic', 'color': 'red'}">ngStyle</button> <br>
+    <button [ngStyle]="getStyle()">ngStyle</button> <br>
+    <button [ngClass]="['btn-bold', 'btn-italic', 'btn-red']">ngClass array</button><br>
+
+    <div>
+        <div>
+            <button (click)="downloadFile()"> {{ downloadStatus===1 ? 'downloading' : downloadStatus === 2 ?
+                'downloaded' : 'click' }}</button>
+        </div>
+        <div [ngClass]="downloadStatus===1 ? 'downloading' : downloadStatus === 2 ? 'downloaded' : 'download'">
+            fffff
+        </div><br>
+        <div [ngClass]="{ 'downloading' : downloadStatus == 1, 'downloaded' : downloadStatus == 2 }">
+            fffff
+        </div><br>
+
+        <div [class.downloaded]="downloadStatus == 2">
+            fffff
+        </div>
+        <div [ngStyle]="{'color': 'red', 'background-color': 'pink'}">Example ngStyle</div><br>
+        <div [ngStyle]="{'color':  downloadStatus ==2 ? 'green' : 'blue'}">Example ngStyle</div>
+    </div>
+
+</div>

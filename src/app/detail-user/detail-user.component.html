@@ -1,0 +1,8 @@
+<div>
+    <p>detail-user works!</p>
+    {{this.user | json}}
+    <div *ngIf="this.user?.id == 3; else section">
+        lucky 3
+    </div><br>
+    <ng-template #section> section </ng-template>
+</div>
