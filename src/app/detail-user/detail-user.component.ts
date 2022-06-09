@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../user';
+import { Booking } from '../booking';
 import { UserService } from '../user.service';
 
 @Component({
@@ -10,14 +10,14 @@ import { UserService } from '../user.service';
 })
 export class DetailUserComponent implements OnInit {
 
-  user: User | undefined;
+  user: Booking | undefined;
   constructor(private route: ActivatedRoute,
     private service: UserService) { }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     console.log(id)
-    this.service.getUsers().subscribe(
+    this.service.getBookings().subscribe(
       res => {
         this.user = res.find(u => u.id == id)
       }

@@ -1,46 +1,92 @@
 <div class="container">
-    <div class="card">
-        <h3 class="text-center"> Users List </h3>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <th>Id</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Email</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of users; let ind= index">
-                        <td routerLink="/detail/{{user.id}}"> {{ user.id }} - {{ ind }}</td>
-                        <td> {{ user.firstName }}</td>
-                        <td> {{ user.lastName }}</td>
-                        <td> {{ user.email }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <mat-grid-list cols="3" rowHeight="5rem">
+        <mat-grid-tile>
+            <button mat-raised-button color="warn" (click)="openDialog()">
+                New Booking
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <mat-form-field appearance="standard">
+
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+            </mat-form-field>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+            </ng-container>
+
+            <!-- First Name Column -->
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
+                <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+            </ng-container>
+
+            <!-- Last Name Column -->
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+                <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+            </ng-container>
+
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+            </ng-container>
+
+            <!-- Amount Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Amount </th>
+                <td mat-cell *matCellDef="let row"> {{row.amount | currency}} </td>
+            </ng-container>
+
+            <!-- Date In Column -->
+            <ng-container matColumnDef="dateIn">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date in </th>
+                <td mat-cell *matCellDef="let row"> {{row.dateIn | date}} </td>
+            </ng-container>
+
+            <!-- Date Out Column -->
+            <ng-container matColumnDef="dateOut">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date out </th>
+                <td mat-cell *matCellDef="let row"> {{row.dateOut | date}} </td>
+            </ng-container>
+
+            <!-- Type Column -->
+            <ng-container matColumnDef="typeBooking">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+                <td mat-cell *matCellDef="let row"> {{row.typeBooking}} </td>
+            </ng-container>
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
+                <td mat-cell *matCellDef="let row">
+                    <button mat-icon-button color="primary" (click)="editBooking(row)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="deleteBooking(row.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
     </div>
-    <button [ngStyle]="{'font-size':20 , 'font-style':'italic', 'color': 'red'}">ngStyle</button> <br>
-    <button [ngStyle]="getStyle()">ngStyle</button> <br>
-    <button [ngClass]="['btn-bold', 'btn-italic', 'btn-red']">ngClass array</button><br>
-
-    <div>
-        <div>
-            <button (click)="downloadFile()"> {{ downloadStatus===1 ? 'downloading' : downloadStatus === 2 ?
-                'downloaded' : 'click' }}</button>
-        </div>
-        <div [ngClass]="downloadStatus===1 ? 'downloading' : downloadStatus === 2 ? 'downloaded' : 'download'">
-            fffff
-        </div><br>
-        <div [ngClass]="{ 'downloading' : downloadStatus == 1, 'downloaded' : downloadStatus == 2 }">
-            fffff
-        </div><br>
-
-        <div [class.downloaded]="downloadStatus == 2">
-            fffff
-        </div>
-        <div [ngStyle]="{'color': 'red', 'background-color': 'pink'}">Example ngStyle</div><br>
-        <div [ngStyle]="{'color':  downloadStatus ==2 ? 'green' : 'blue'}">Example ngStyle</div>
-    </div>
-
 </div>
