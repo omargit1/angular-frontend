@@ -69,6 +69,35 @@ export class DialogComponent implements OnInit {
     );
   }
 
+  randomFields() {
+    this.bookingForm.controls['firstName'].setValue(this.getRandomValue(6, 'text'))
+    this.bookingForm.controls['lastName'].setValue(this.getRandomValue(8, 'text'))
+    this.bookingForm.controls['email'].setValue(this.getRandomEmail())
+    this.bookingForm.controls['typeBooking'].setValue(Math.random() > 0.5 ? 'Guarantee' : 'Prepayment')
+  }
+
+  getRandomEmail() {
+    return this.getRandomValue(8, 'text') + '@test.com'
+  }
+
+  getRandomValue(length: number, type: string) {
+    let result = '';
+    const charactersText = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersNumber = '0123456789'
+    var charactersLength = (type === 'text') ? charactersText.length : charactersNumber.length;
+    for (var i = 0; i < length; i++) {
+      if (type === 'text') {
+        result += charactersText.charAt(Math.floor(Math.random() *
+          charactersLength));
+      } else {
+        result += charactersNumber.charAt(Math.floor(Math.random() *
+          charactersLength));
+      }
+    }
+    return result;
+  }
+
+
 }
 
 
