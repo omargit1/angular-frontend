@@ -43,5 +43,6 @@
 </div>
 <div mat-dialog-actions [align]="'end'">
     <button mat-raised-button color="warn" mat-dialog-close>Close</button>
-    <button mat-raised-button color="primary" mat-dialog-close (click)="addBooking()">{{actionBtn}}</button>
+    <button mat-raised-button color="primary" mat-dialog-close (click)="addBooking()"
+        [disabled]="!bookingForm.valid">{{actionBtn}}</button>
 </div>

@@ -30,7 +30,7 @@ export class DialogComponent implements OnInit {
       email: ['', Validators.required],
       amount: ['', Validators.required]
     })
-    console.log(this.editData)
+    console.log('edit:', this.editData)
     if (this.editData) {
       this.actionBtn = "Update"
       this.bookingForm.patchValue(this.editData)
@@ -38,21 +38,23 @@ export class DialogComponent implements OnInit {
   }
 
   addBooking() {
-    console.log(this.bookingForm.value)
-    if (this.bookingForm.valid && !this.editData) {
-      this.api.addBooking(this.bookingForm.value).subscribe({
-        next: (res) => {
-          alert("Product added successfully")
-          this.bookingForm.reset();
-          this.dialogRef.close("save");
-        },
-        error: () => {
-          alert("Error while saving product")
-        }
-      })
-    } else {
-      this.updateBooking();
+    if (this.bookingForm.valid) {
+      if (!this.editData) {
+        this.api.addBooking(this.bookingForm.value).subscribe({
+          next: (res) => {
+            alert("Product added successfully")
+            this.bookingForm.reset();
+            this.dialogRef.close("save");
+          },
+          error: () => {
+            alert("Error while saving product")
+          }
+        })
+      } else {
+        this.updateBooking();
+      }
     }
+
   }
 
   updateBooking() {
