@@ -8,8 +8,8 @@ import { Booking } from './booking';
 })
 export class UserService {
 
-  private baseUrl = "http://localhost:8080/api/bookings"
-  private baseUrlRemote = "https://springboot-backend062022.herokuapp.com/api/bookings"
+  //private baseUrl = "http://localhost:8080/api/bookings"
+  private baseUrl = "https://springboot-backend062022.herokuapp.com/api/bookings"
 
   users: Array<Booking> = [
     new Booking(1, "Omar", "NomO", "ee0@gmail.com"),
