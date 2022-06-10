@@ -16,7 +16,6 @@ export class DetailUserComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(id)
     this.service.getBookings().subscribe(
       res => {
         this.user = res.find(u => u.id == id)

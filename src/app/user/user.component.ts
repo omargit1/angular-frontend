@@ -60,9 +60,8 @@ export class UserComponent implements OnInit {
       width: '30%',
       data: row
     }).afterClosed().subscribe(val => {
-      if (val == 'update') {
-        this.fetchBookings();
-      }
+      console.log(val)
+      this.fetchBookings();
     })
   }
 
@@ -70,9 +69,8 @@ export class UserComponent implements OnInit {
     this.dialog.open(DialogComponent, {
       width: '30%'
     }).afterClosed().subscribe(val => {
-      if (val == 'save') {
-        this.fetchBookings();
-      }
+      console.log(val)
+      this.fetchBookings();
     });
   }
 

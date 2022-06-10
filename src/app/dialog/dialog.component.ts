@@ -60,8 +60,7 @@ export class DialogComponent implements OnInit {
       next: (res) => {
         alert("Booking updated successfully")
         this.bookingForm.reset()
-        this.dialogRef.close('update')
-
+        this.dialogRef.close("update")
       },
       error: () => {
         alert("error while updating a record")
